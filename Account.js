@@ -22,7 +22,13 @@ module.exports = class Account{
 
     async deposit(amount) {
         await FileSystem.write(this.filePath, this.#balance + amount)
+        this.#balance = this.#balance + amount;
 
+    }
+    async withdraw(amount) {
+        if(this.balance < amount) throw new Error()
+        await FileSystem.write(this.filePath, this.#balance - amount);
+        this.#balance = this.#balance - amount;
     }
 
    async #load(){
