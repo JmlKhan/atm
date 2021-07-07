@@ -19,6 +19,12 @@ module.exports = class Account{
     get filePath() {
         return `accounts/${this.name}.txt`
     }
+
+    async deposit(amount) {
+        await FileSystem.write(this.filePath, this.#balance + amount)
+
+    }
+
    async #load(){
         this.#balance = parseFloat(await FileSystem.read(this.filePath))
        }
